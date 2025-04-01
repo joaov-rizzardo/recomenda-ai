@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className="w-3xl">
       <h1 className="text-center text-6xl leading-relaxed text-emerald-600 font-light">
-        Descubra o que assistir
+        Descubra o que assistir!
       </h1>
       {/* <div className="flex flex-col">
         <Button>🔥 Bombando na última semana 🔥</Button>
