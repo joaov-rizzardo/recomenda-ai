@@ -2,19 +2,19 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 
-interface MediaTypeCardProps {
+interface RecommendationTypeCardProps {
   name: string;
   onSelect: () => void;
   emote: string;
   description: string;
 }
 
-export function MediaTypeCard({
+export function RecommendationTypeCard({
   name,
   emote,
   onSelect,
   description,
-}: MediaTypeCardProps) {
+}: RecommendationTypeCardProps) {
   return (
     <Card
       onClick={onSelect}
@@ -32,3 +32,4 @@ export function MediaTypeCard({
     </Card>
   );
 }
+("");
