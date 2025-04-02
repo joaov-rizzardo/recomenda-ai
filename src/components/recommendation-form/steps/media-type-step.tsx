@@ -2,7 +2,6 @@
 
 import { MediaType, useRecommendationStore } from "../recommendation-store";
 import { MediaTypeCard } from "./components/media-type-card";
-import { MdMovie, MdTv } from "react-icons/md";
 
 export function MediaTypeStep() {
   const { nextStep, changeMediaType } = useRecommendationStore();
