@@ -8,6 +8,7 @@ import { useRecommendationStore } from "../recommendation-store";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { usePreferences } from "../hooks/usePreferences";
 
 const FormSchema = z.object({
   keyword: z.string().min(1),
@@ -16,6 +17,7 @@ const FormSchema = z.object({
 type FormType = z.infer<typeof FormSchema>;
 
 export function KeywordsStep() {
+  const preferences = usePreferences();
   const { addKeyword, removeKeyword, previousStep, keywords } =
     useRecommendationStore();
 
@@ -24,7 +26,7 @@ export function KeywordsStep() {
   });
 
   const submit = ({ keyword }: FormType) => {
-    if(keywords.size >= 3) return;
+    if (keywords.size >= 3) return;
     addKeyword(keyword);
     reset();
   };
@@ -61,9 +63,7 @@ export function KeywordsStep() {
           <Button variant={"link"} onClick={previousStep}>
             <BsArrowLeft /> Voltar
           </Button>
-          <Button>
-            {keywords.size === 0 ? "Pular" : "Continuar"}
-          </Button>
+          <Button onClick={preferences.redirect}>{keywords.size === 0 ? "Pular" : "Continuar"}</Button>
         </div>
       </div>
     </div>

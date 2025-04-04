@@ -1,7 +1,9 @@
+import { PreferencesType } from "@/types/preference-types";
 import { create } from "zustand";
 
-export type MediaType = "movie" | "serie";
-export type RecommendationType = "custom" | "tendencies";
+export type MediaType = PreferencesType["mediaType"];
+
+export type RecommendationType = PreferencesType["recommendationType"];
 
 type RecommendationStoreType = {
   mediaType: MediaType;

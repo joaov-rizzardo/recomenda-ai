@@ -7,8 +7,10 @@ import {
   RecommendationType,
   useRecommendationStore,
 } from "../recommendation-store";
+import { usePreferences } from "../hooks/usePreferences";
 
 export function RecommendationTypeStep() {
+  const preferences = usePreferences();
   const { nextStep, previousStep, changeRecommendationType } =
     useRecommendationStore();
 
@@ -18,6 +20,7 @@ export function RecommendationTypeStep() {
       nextStep();
       return;
     }
+    preferences.redirect();
   }
 
   return (
