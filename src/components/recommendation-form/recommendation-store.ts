@@ -1,4 +1,5 @@
 import { PreferencesType } from "@/types/preference-types";
+import { useRouter } from "next/navigation";
 import { create } from "zustand";
 
 export type MediaType = PreferencesType["mediaType"];
@@ -20,10 +21,11 @@ type RecommendationStoreType = {
   clearCategories: () => void;
   addKeyword: (keyword: string) => void;
   removeKeyword: (keyword: string) => void;
+  redirect: (router: ReturnType<typeof useRouter>) => void;
 };
 
 export const useRecommendationStore = create<RecommendationStoreType>(
-  (set) => ({
+  (set, get) => ({
     step: 1,
     mediaType: "movie",
     recommendationType: "custom",
@@ -60,5 +62,19 @@ export const useRecommendationStore = create<RecommendationStoreType>(
         newKeywords.delete(keyword);
         return { keywords: newKeywords };
       }),
+    redirect: async (router) => {
+      const state = get();
+      const body: PreferencesType = {
+        mediaType: state.mediaType,
+        recommendationType: state.recommendationType,
+        categories: Array.from(state.categories),
+        keywords: Array.from(state.keywords),
+      };
+      await fetch("/api/save-preferences", {
+        method: "POST",
+        body: JSON.stringify(body),
+      });
+      router.push("/resultados");
+    },
   })
 );

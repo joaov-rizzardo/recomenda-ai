@@ -7,11 +7,11 @@ import {
   RecommendationType,
   useRecommendationStore,
 } from "../recommendation-store";
-import { usePreferences } from "../hooks/usePreferences";
+import { useRouter } from "next/navigation";
 
 export function RecommendationTypeStep() {
-  const preferences = usePreferences();
-  const { nextStep, previousStep, changeRecommendationType } =
+  const router = useRouter()
+  const { nextStep, previousStep, changeRecommendationType, redirect } =
     useRecommendationStore();
 
   function select(recommendationType: RecommendationType) {
@@ -20,7 +20,7 @@ export function RecommendationTypeStep() {
       nextStep();
       return;
     }
-    preferences.redirect();
+    redirect(router);
   }
 
   return (

@@ -2,16 +2,17 @@ import { env } from "@/lib/env";
 import { DiscoverMovieResponse } from "@/types/discover-movie-types";
 import { DiscoverSeriesResponse } from "@/types/discover-series-types";
 import { KeywordResponseType } from "@/types/keywords-response-type";
-import { PreferencesType } from "@/types/preference-types";
 import { TrendingMoviesResponse } from "@/types/trending-movie-types";
+import { TrendingSeriesResponse } from "@/types/trending-series-types";
 import { WatchProvidersResponse } from "@/types/watch-providers-types";
-import { Axios } from "axios";
+import axios, { Axios } from "axios";
 
 export class TMDB {
-  private static api: Axios = new Axios({
+  private static api: Axios = axios.create({
     baseURL: env.TMDB_URL,
     headers: {
       Authorization: `Bearer ${env.TMDB_TOKEN}`,
+      "Content-Type": "application/json",
     },
   });
 
@@ -23,21 +24,21 @@ export class TMDB {
   }
 
   static async getTrendingSeries(timeWindow: "week" | "day") {
-    const { data } = await this.api.get<TrendingMoviesResponse>(
+    const { data } = await this.api.get<TrendingSeriesResponse>(
       `/trending/tv/${timeWindow}?language=pt-BR`
     );
     return data;
   }
 
-  static async getDiscoverMovies(preferences: PreferencesType) {
+  static async getDiscoverMovies(categories: number[], keywords: number[]) {
     const { data } = await this.api.get<DiscoverMovieResponse>(
       `/discover/movie`,
       {
         params: {
           language: "pt-BR",
           region: "br",
-          with_genres: preferences.categories.join("|"),
-          with_keywords: preferences.keywords.join("|"),
+          with_genres: categories.join("|"),
+          with_keywords: keywords.join("|"),
           sort_by: "popularity.desc",
         },
       }
@@ -45,14 +46,14 @@ export class TMDB {
     return data;
   }
 
-  static async getDiscoverSeries(preferences: PreferencesType) {
+  static async getDiscoverSeries(categories: number[], keywords: number[]) {
     const { data } = await this.api.get<DiscoverSeriesResponse>(
       `/discover/tv`,
       {
         params: {
           language: "pt-BR",
-          with_genres: preferences.categories.join("|"),
-          with_keywords: preferences.keywords.join("|"),
+          with_genres: categories.join("|"),
+          with_keywords: keywords.join("|"),
           sort_by: "popularity.desc",
         },
       }

@@ -1,11 +1,11 @@
 export interface TrendingSeriesResponse {
   page: number;
-  results: Serie[];
+  results: Result[];
   total_pages: number;
   total_results: number;
 }
 
-export interface Serie {
+export interface Result {
   backdrop_path: string;
   id: number;
   name: string;
