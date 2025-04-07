@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { RecommendationTypeCard } from "./components/recommendation-card-type";
-import { BsArrowLeft } from "react-icons/bs";
+import { BsArrowLeft, BsFire } from "react-icons/bs";
+import { TbTargetArrow } from "react-icons/tb";
 import {
   RecommendationType,
   useRecommendationStore,
@@ -25,18 +26,18 @@ export function RecommendationTypeStep() {
 
   return (
     <div>
-      <h2 className="text-4xl leading-relaxed text-emerald-200 text-center font-thin">
+      <h2 className="text-5xl leading-relaxed text-transparent bg-clip-text bg-gradient-to-br from-amber-800 to-amber-400 text-center font-semilbold font-title">
         Quer algo popular ou uma seleção personalizada?
       </h2>
       <div className="flex flex-col lg:flex-row justify-center gap-5 mt-5">
         <RecommendationTypeCard
-          emote={"🔥"}
+          Icon={BsFire}
           name="Tendências"
           onSelect={() => select("tendencies")}
           description="Veja os filmes e séries que estão bombando esta semana. Escolha e assista sem perder tempo!"
         />
         <RecommendationTypeCard
-          emote={"🎯"}
+          Icon={TbTargetArrow}
           name="Personalizado"
           onSelect={() => select("custom")}
           description="Filtre por gêneros e palavras-chave para encontrar exatamente o que combina com seu estilo."

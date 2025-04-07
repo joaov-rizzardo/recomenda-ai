@@ -1,35 +1,35 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { IconType } from "react-icons/lib";
 
 interface RecommendationTypeCardProps {
   name: string;
   onSelect: () => void;
-  emote: string;
+  Icon: IconType;
   description: string;
 }
 
 export function RecommendationTypeCard({
   name,
-  emote,
+  Icon,
   onSelect,
   description,
 }: RecommendationTypeCardProps) {
   return (
     <Card
       onClick={onSelect}
-      className="group bg-gray-900 border-slate-800 py-5 flex-1 cursor-pointer hover:bg-emerald-700 transition-all duration-1000"
+      className="group bg-neutral-900/80 border-neutral-900 py-5 flex-1 hover:scale-105 transition-all duration-1000 cursor-pointer"
     >
       <CardContent className="flex gap-4 justify-between text-end">
-        <span className="text-6xl self-center">{emote}</span>
-        <div className="self-end flex flex-col justify-end gap-2">
-          <h2 className="text-gray-300 text-2xl font-light group-hover:text-gray-900 group-hover:font-semibold transition-all duration-1000">
-            {name}
-          </h2>
-          <p className="text-gray-500 group-hover:text-gray-800 transition-all duration-1000">{description}</p>
+        <div className="bg-neutral-950/30 size-25 flex justify-center items-center rounded-xl">
+          <Icon className="size-14 text-purple-500" />
+        </div>
+        <div className="self-end flex flex-col justify-end gap-2 flex-1">
+          <h2 className="text-gray-300 text-2xl font-light">{name}</h2>
+          <p className="text-gray-500 text-md">{description}</p>
         </div>
       </CardContent>
     </Card>
   );
 }
-("");

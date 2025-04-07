@@ -28,15 +28,15 @@ export function GenreSelectionStep() {
 
   return (
     <div>
-      <h2 className="text-4xl leading-relaxed text-emerald-200 text-center font-thin">
+      <h2 className="text-5xl leading-relaxed text-transparent bg-clip-text bg-gradient-to-br from-amber-800 to-amber-400 text-center font-semilbold font-title">
         Quais gêneros está buscando?
       </h2>
 
-      <div className="grid grid-cols-2 py-5 px-3 gap-4 mt-6 bg-gray-900 border border-slate-800 rounded-xl">
+      <div className="grid grid-cols-2 py-5 px-3 gap-4 mt-6 bg-neutral-900/80 border border-neutral-800 rounded-xl">
         {genres.map((genre) => (
           <label
             key={genre.id}
-            className="flex items-center gap-2 p-3 rounded-lg cursor-pointer hover:bg-emerald-900/20 transition"
+            className="flex items-center gap-2 p-3 rounded-lg cursor-pointer hover:bg-purple-500/20 transition"
           >
             <Checkbox
               id={`genre-${genre.id}`}

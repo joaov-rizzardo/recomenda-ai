@@ -33,11 +33,11 @@ export function KeywordsStep() {
 
   return (
     <div>
-      <h2 className="text-4xl leading-relaxed text-emerald-200 text-center font-thin">
+      <h2 className="text-4xl leading-relaxed text-transparent bg-clip-text bg-gradient-to-br from-amber-800 to-amber-400 text-center font-semilbold font-title">
         Diga até três palavras chave para nos indicar o que está buscando
       </h2>
       <form
-        className="flex gap-5 items-center mt-3"
+        className="flex gap-5 items-end mt-3"
         onSubmit={handleSubmit(submit)}
       >
         <Input
@@ -45,8 +45,8 @@ export function KeywordsStep() {
           className="h-12"
           {...register("keyword")}
         />
-        <Button variant={"outline"} size={"lg"} disabled={keywords.size >= 3}>
-          <BsPlus /> Adicionar
+        <Button size={"lg"} variant={"secondary"} disabled={keywords.size >= 3}>
+          <BsPlus className="size-6"/>
         </Button>
       </form>
       <div className="flex gap-4 items-center mt-5">

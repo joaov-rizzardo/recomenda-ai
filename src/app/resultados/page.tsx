@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { WatchableCard } from "@/components/watchable-card";
 import { PREFERENCES_COOKIE_NAME } from "@/constants/preferences-cookie-name";
 import { RecommendationHandler } from "@/lib/recommendation-handler";
 import { PreferenceSchema } from "@/types/preference-types";
@@ -19,7 +20,7 @@ export default async function Results() {
   // console.log(result);
   return (
     <div>
-      <h1 className="text-5xl uppercase font-normal text-center text-yellow-400">
+      <h1 className="text-5xl uppercase font-normal text-center text-white">
         Seus resultados
       </h1>
       <p className="text-xl text-gray-500 mt-2 mb-4 text-center">
@@ -42,21 +43,7 @@ export default async function Results() {
             Mickey 17
           </CardContent>
         </Card>
-        <Card className="bg-gray-900 border-slate-800 w-[250px]">
-          <CardHeader>
-            <Image
-              src={
-                "https://media.themoviedb.org/t/p/w220_and_h330_face/tXGVxrg7l8RAD1MzGcYjuKFo6Mt.jpg"
-              }
-              alt=""
-              width={"220"}
-              height={"330"}
-            />
-          </CardHeader>
-          <CardContent className="text-emerald-700 text-xl font-semibold leading-relaxed">
-            The bondsman
-          </CardContent>
-        </Card>
+        <WatchableCard />
         <Card className="bg-gray-900 border-slate-800 w-[250px]">
           <CardHeader>
             <Image

@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Anton,
+  Montserrat,
+} from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const anton = Anton({
+  variable: "--font-anton",
   subsets: ["latin"],
-});
+  weight: "400"
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -25,9 +30,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} w-screen h-screen flex justify-center items-center flex-col bg-gradient-to-br from-gray-800 to-gray-950`}
+        className={`
+          ${anton.variable}
+          ${montserrat.variable}
+          w-screen h-screen
+        `}
+        style={{
+          backgroundImage:
+            "url('/images/BR-pt-20250331-TRIFECTA-perspective_157f81c2-fd41-421a-8b02-2253912e12e2_large.jpg')",
+        }}
       >
-        {children}
+        <div className="bg-gradient-to-br from-black/80 to-black/70 w-full h-full flex justify-center items-center flex-col">
+          {children}
+        </div>
       </body>
     </html>
   );
