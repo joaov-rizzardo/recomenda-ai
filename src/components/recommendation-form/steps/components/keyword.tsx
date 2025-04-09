@@ -11,7 +11,7 @@ interface KeywordProps {
 export function Keyword({ name, onDelete }: KeywordProps) {
   return (
     <div
-      className="group cursor-pointer py-1 px-2 flex gap-3 items-center bg-purple-700/80 text-sm text-gray-900 rounded-full"
+      className="group cursor-pointer py-1 px-2 flex gap-3 items-center bg-gradient-to-br from-purple-900 to-purple-600 text-sm text-gray-950 rounded-full font-normal"
       onClick={() => onDelete(name)}
     >
       {name}

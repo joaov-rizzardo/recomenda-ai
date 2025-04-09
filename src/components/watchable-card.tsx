@@ -16,32 +16,36 @@ import {
 export function WatchableCard() {
   return (
     <Dialog>
-      <DialogTrigger>
-        <Card className="bg-gray-900 border-slate-800 w-[250px]">
+      <DialogTrigger className="flex-1">
+        <Card className="bg-transparent border-0">
           <CardHeader>
-            <Image
-              src={
-                "https://media.themoviedb.org/t/p/w220_and_h330_face/tXGVxrg7l8RAD1MzGcYjuKFo6Mt.jpg"
-              }
-              alt=""
-              width={"220"}
-              height={"330"}
-            />
+            <div className="group w-full aspect-[220/330] relative overflow-hidden rounded-xl">
+              <Image
+                src={
+                  "https://media.themoviedb.org/t/p/w220_and_h330_face/1Wtfucko1wQBAN4rJbRnqA6kqQQ.jpg"
+                }
+                alt=""
+                fill
+                className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
+              />
+            </div>
           </CardHeader>
-          <CardContent className="text-emerald-700 text-xl font-semibold leading-relaxed">
-            The bondsman
-          </CardContent>
         </Card>
       </DialogTrigger>
       <DialogContent
-        className="bg-cover bg-center border-slate-800 p-0 text-white"
-        style={{
-          backgroundImage:
-            "url('https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/qUc0Hol3eP74dbW4YyqT6oRLYgT.jpg')",
-        }}
+        style={{ maxWidth: "auto" }}
+        className="!max-w-none w-[600px] bg-gradient-to-b from-neutral-900 to-neutral-950 backdrop-blur-md border-2 border-neutral-800 p-0 text-white rounded-md"
       >
-        <DialogHeader className="bg-emerald-800/15 rounded-md p-4">
-          <DialogTitle className="text-emerald-400">Mickey 17</DialogTitle>
+                  <div
+            className="w-full aspect-[1920/800] bg-cover bg-no-repeat"
+            style={{
+              backgroundImage:
+                "url('https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces/7dowXHcFccjmxf0YZYxDFkfVq65.jpg')",
+            }}
+          />
+        <DialogHeader className="relative -top-8 bg-gradient-to-b from-neutral-900/5 backdrop-blur-xs to-neutral-950 h-[calc(100%+32px)]">
+
+          <DialogTitle className="text-emerald-400 mt-8">Mickey 17</DialogTitle>
           <DialogDescription className="text-gray-300">
             Mickey faz parte de um programa espacial de colonização e sempre é
             enviado para missões perigosas, quase suicidas. Se morrer, ele é
