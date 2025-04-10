@@ -32,9 +32,9 @@ export function KeywordsStep() {
   };
 
   return (
-    <div>
+    <div className="bg-neutral-900/80 border border-neutral-800 rounded-xl px-12 pt-12 pb-8">
       <h2 className="text-4xl leading-relaxed text-transparent bg-clip-text bg-gradient-to-br from-amber-800 to-amber-400 text-center font-semilbold font-title">
-        Diga até três palavras chave para nos indicar o que está buscando
+        Encontre o que assistir em até 3 palavras
       </h2>
       <form
         className="flex gap-5 items-end mt-3"
@@ -46,7 +46,7 @@ export function KeywordsStep() {
           {...register("keyword")}
         />
         <Button size={"lg"} variant={"secondary"} disabled={keywords.size >= 3}>
-          <BsPlus className="size-6"/>
+          <BsPlus className="size-6" />
         </Button>
       </form>
       <div className="flex gap-4 items-center mt-5">
