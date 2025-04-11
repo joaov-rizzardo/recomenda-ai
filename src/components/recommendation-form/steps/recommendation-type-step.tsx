@@ -26,10 +26,10 @@ export function RecommendationTypeStep() {
 
   return (
     <div>
-      <h2 className="text-5xl leading-relaxed text-transparent bg-clip-text bg-gradient-to-br from-amber-800 to-amber-400 text-center font-semilbold font-title">
+      <h2 className="text-2xl md:text-3xl lg:text-5xl leading-relaxed text-amber-600 text-center font-semilbold font-title">
         Quer algo popular ou uma seleção personalizada?
       </h2>
-      <div className="flex flex-col lg:flex-row justify-center gap-5 mt-5">
+      <div className="flex flex-col md:flex-row justify-center gap-5 mt-5">
         <RecommendationTypeCard
           Icon={BsFire}
           name="Tendências"

@@ -28,11 +28,11 @@ export function GenreSelectionStep() {
 
   return (
     <div>
-      <h2 className="text-5xl leading-relaxed text-transparent bg-clip-text bg-gradient-to-br from-amber-800 to-amber-400 text-center font-semilbold font-title">
+      <h2 className="text-2xl md:text-3xl lg:text-5xl leading-relaxed text-amber-600 text-center font-semilbold font-title">
         Quais gêneros está buscando?
       </h2>
 
-      <div className="grid grid-cols-2 py-5 px-3 gap-4 mt-6 bg-neutral-900/80 border border-neutral-800 rounded-xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 max-h-[70dvh] overflow-auto py-5 px-3 gap-4 mt-6 bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-xl">
         {genres.map((genre) => (
           <label
             key={genre.id}
@@ -44,7 +44,7 @@ export function GenreSelectionStep() {
               checked={categories.has(genre.id)}
               onCheckedChange={() => toggleCategory(genre.id)}
             />
-            <span className="text-gray-300 font-normal">{genre.name}</span>
+            <span className="text-gray-400 text-sm md:text-md font-normal">{genre.name}</span>
           </label>
         ))}
       </div>

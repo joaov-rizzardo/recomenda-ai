@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <main className="w-3xl flex justify-center items-center flex-col">
+    <main className="w-4xl px-5 lg:px-0 py-5 flex justify-center items-center flex-col">
       <h1 className="text-center text-3xl leading-relaxed text-emerald-600 font-light">
       🎬 Descubra sua próxima maratona!
       </h1>

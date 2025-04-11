@@ -32,24 +32,30 @@ export function KeywordsStep() {
   };
 
   return (
-    <div className="bg-neutral-900/80 border border-neutral-800 rounded-xl px-12 pt-12 pb-8">
-      <h2 className="text-4xl leading-relaxed text-transparent bg-clip-text bg-gradient-to-br from-amber-800 to-amber-400 text-center font-semilbold font-title">
-        Encontre o que assistir em até 3 palavras
+    <div className="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-xl px-6 md:px-12 pt-12 pb-8">
+      <h2 className="text-2xl md:text-3xl lg:text-5xl leading-relaxed text-amber-600 text-center font-semilbold font-title">
+        Palavras chave
       </h2>
+      <p className="mt-2 text-neutral-500 text-xs md:text-md lg:text-lg xl:text-xl">
+        Nos diga até três palavras-chave que descrevam o que você quer assistir
+        — pode ser um gênero, tema ou até um sentimento, como 'comédia
+        romântica', 'futurista', ou 'histórias reais'. Vamos encontrar algo que
+        combine com o seu momento! Se preferir, você pode pular essa etapa.
+      </p>
       <form
-        className="flex gap-5 items-end mt-3"
+        className="flex gap-5 items-end mt-5"
         onSubmit={handleSubmit(submit)}
       >
         <Input
           placeholder="Magia, mistério, investigação..."
-          className="h-12"
+          className="h-9 text-sm lg:text-md"
           {...register("keyword")}
         />
-        <Button size={"lg"} variant={"secondary"} disabled={keywords.size >= 3}>
+        <Button variant={"secondary"} disabled={keywords.size >= 3}>
           <BsPlus className="size-6" />
         </Button>
       </form>
-      <div className="flex gap-4 items-center mt-5">
+      <div className="flex flex-col md:flex-row gap-4 items-end md:items-center mt-5">
         <div className="flex flex-1 gap-3 flex-wrap">
           {Array.from(keywords).map((keyword) => (
             <Keyword
@@ -63,7 +69,7 @@ export function KeywordsStep() {
           <Button variant={"link"} onClick={previousStep}>
             <BsArrowLeft /> Voltar
           </Button>
-          <Button onClick={() => redirect(router)}>
+          <Button size={"sm"} onClick={() => redirect(router)}>
             {keywords.size === 0 ? "Pular" : "Continuar"}
           </Button>
         </div>

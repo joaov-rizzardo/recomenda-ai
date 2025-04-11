@@ -33,14 +33,14 @@ export default function RootLayout({
         className={`
           ${anton.variable}
           ${montserrat.variable}
-          w-screen h-screen
+          w-dvw h-dvh overflow-hidden
         `}
         style={{
           backgroundImage:
             "url('/images/BR-pt-20250331-TRIFECTA-perspective_157f81c2-fd41-421a-8b02-2253912e12e2_large.jpg')",
         }}
       >
-        <div className="bg-gradient-to-br from-black/80 to-black/70 w-full h-full flex justify-center items-center flex-col">
+        <div className="bg-gradient-to-br from-black/80 to-black/70 w-full h-full flex justify-center items-center flex-col overflow-y-auto">
           {children}
         </div>
       </body>
