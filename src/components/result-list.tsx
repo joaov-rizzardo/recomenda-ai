@@ -47,7 +47,7 @@ export function ResultList({ results }: ResultListProps) {
       </Carousel>
 
       <div className="mt-6 flex justify-end items-center gap-3">
-        <Button variant={"outline"} onClick={() => router.push("/indicacao")}>
+        <Button variant={"outline"} onClick={() => router.push("/")}>
           Recomeçar
         </Button>
         <Button
