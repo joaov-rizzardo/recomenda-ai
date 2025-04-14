@@ -1,3 +1,4 @@
+import { ResultList } from "@/components/result-list";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -32,28 +33,7 @@ export default async function Results() {
         sua noite de entretenimento ainda mais divertida, leve e do jeitinho que
         você gosta.
       </p>
-      <Carousel className="w-full">
-        <CarouselContent className="">
-          {/* {result.map((watchable) => ( */}
-            <CarouselItem className="basis-full md:basis-1/3">
-              <WatchableCard watchable={result[0].toPlain()} />
-            </CarouselItem>
-            <CarouselItem className="basis-full md:basis-1/3">
-              <WatchableCard watchable={result[1].toPlain()} />
-            </CarouselItem>
-            <CarouselItem className="basis-full md:basis-1/3">
-              <WatchableCard watchable={result[2].toPlain()} />
-            </CarouselItem>
-          {/* ))} */}
-        </CarouselContent>
-        <CarouselPrevious className="md:hidden border-none text-gray-300 -left-8" />
-        <CarouselNext className="md:hidden border-none text-gray-300 -right-8" />
-      </Carousel>
-
-      <div className="mt-6 flex justify-end items-center gap-3">
-        <Button variant={"outline"}>Recomeçar</Button>
-        <Button>Indicar outros</Button>
-      </div>
+      <ResultList results={result.map((r) => r.toPlain())} />
     </div>
   );
 }

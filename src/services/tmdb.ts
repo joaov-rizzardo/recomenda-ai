@@ -37,7 +37,7 @@ export class TMDB {
         params: {
           language: "pt-BR",
           region: "br",
-          with_genres: categories.join("|"),
+          with_genres: categories.join(";"),
           with_keywords: keywords.join("|"),
           sort_by: "popularity.desc",
         },
@@ -52,7 +52,7 @@ export class TMDB {
       {
         params: {
           language: "pt-BR",
-          with_genres: categories.join("|"),
+          with_genres: categories.join(";"),
           with_keywords: keywords.join("|"),
           sort_by: "popularity.desc",
         },
