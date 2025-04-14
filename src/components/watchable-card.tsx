@@ -1,21 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import { Card, CardContent, CardHeader } from "./ui/card";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Card, CardHeader } from "./ui/card";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { ScoreCircle } from "./score-circle";
 import { ScoreIndicator } from "./score-indicator";
+import { WatchableParams } from "@/data/watchable";
+import { env } from "@/lib/env";
+import { GenreSeparator } from "./genre-separator";
+import { Fragment } from "react";
 
-export function WatchableCard() {
+interface WatchableCardProps {
+  watchable: WatchableParams;
+}
+
+export function WatchableCard({ watchable }: WatchableCardProps) {
   return (
     <Dialog>
       <DialogTrigger className="w-full">
@@ -23,9 +27,7 @@ export function WatchableCard() {
           <CardHeader>
             <div className="group w-full aspect-[220/330] relative overflow-hidden rounded-xl">
               <Image
-                src={
-                  "https://media.themoviedb.org/t/p/w220_and_h330_face/1Wtfucko1wQBAN4rJbRnqA6kqQQ.jpg"
-                }
+                src={`${env.TMDB_MEDIA_URL}w220_and_h330_face/${watchable.banner}`}
                 alt=""
                 fill
                 className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
@@ -38,8 +40,7 @@ export function WatchableCard() {
         <div
           className="w-full aspect-[1920/800] bg-cover bg-no-repeat flex justify-end items-end px-5 py-5"
           style={{
-            backgroundImage:
-              "url('https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces/omzeDBazScUAQwe3SiBVwgKr1p8.jpg')",
+            backgroundImage: `url('${env.TMDB_MEDIA_URL}w1920_and_h800_multi_faces/${watchable.backdrop}')`,
           }}
         ></div>
         <div className="relative -top-8 bg-gradient-to-b from-neutral-900/30 backdrop-blur-xs to-neutral-950 h-[calc(100%+32px)] px-5">
@@ -47,28 +48,28 @@ export function WatchableCard() {
             <div className="flex flex-col gap-3 flex-1">
               <DialogHeader className="flex justify-between flex-row">
                 <DialogTitle className="text-neutral-300 font-title text-lg md:text-xl lg:text-2xl">
-                  Mickey 17
+                  {watchable.title}
                 </DialogTitle>
               </DialogHeader>
               <span className="text-neutral-500 text-xs lg:text-md flex items-center gap-2">
-                2024{" "}
-                <div className="mx-2 w-1 h-1 bg-gray-400 rounded-full"></div>{" "}
-                Terror{" "}
-                <div className="mx-2 w-1 h-1 bg-gray-400 rounded-full"></div>{" "}
-                Investigação{" "}
-                <div className="mx-2 w-1 h-1 bg-gray-400 rounded-full"></div>{" "}
-                Policial
+                {watchable.releaseDate.getFullYear()}
+                <GenreSeparator />
+                {watchable.genres.map((genre, index) => (
+                  <Fragment key={genre}>
+                    {genre}
+                    {index < watchable.genres.length - 1 && <GenreSeparator />}
+                  </Fragment>
+                ))}
               </span>
             </div>
-            <ScoreIndicator score={8} className="text-sm md:text-md lg:text-lg self-start"/>
+            <ScoreIndicator
+              score={watchable.voteAverage}
+              className="text-sm md:text-md lg:text-lg self-start"
+            />
           </div>
 
           <p className="mt-3 text-xs md:text-sm lg:text-md text-neutral-400">
-            Mickey faz parte de um programa espacial de colonização e sempre é
-            enviado para missões perigosas, quase suicidas. Se morrer, ele é
-            clonado e boa parte de suas memórias são recuperadas. Mas, após seis
-            mortes, ele começa a entender o porquê de seu cargo nunca ter sido
-            ocupado antes.
+            {watchable.overview}
           </p>
         </div>
       </DialogContent>

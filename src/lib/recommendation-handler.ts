@@ -1,3 +1,4 @@
+import { MovieGenres, SerieGenres } from "@/data/genres";
 import { Watchable } from "@/data/watchable";
 import { TMDB } from "@/services/tmdb";
 import { PreferencesType } from "@/types/preference-types";
@@ -29,6 +30,11 @@ export class RecommendationHandler {
             title: item.title,
             voteAverage: item.vote_average,
             voteCount: item.vote_count,
+            backdrop: item.backdrop_path,
+            releaseDate: new Date(item.release_date),
+            genres: item.genre_ids.map(
+              (i) => MovieGenres.find((g) => g.id === i)?.name || ""
+            ),
           })
       );
     }
@@ -46,6 +52,11 @@ export class RecommendationHandler {
           title: item.name,
           voteAverage: item.vote_average,
           voteCount: item.vote_count,
+          backdrop: item.backdrop_path,
+          releaseDate: new Date(item.first_air_date),
+          genres: item.genre_ids.map(
+            (i) => SerieGenres.find((g) => g.id === i)?.name || ""
+          ),
         })
     );
   }
@@ -63,6 +74,11 @@ export class RecommendationHandler {
             title: item.title,
             voteAverage: item.vote_average,
             voteCount: item.vote_count,
+            backdrop: item.backdrop_path,
+            releaseDate: new Date(item.release_date),
+            genres: item.genre_ids.map(
+              (i) => MovieGenres.find((g) => g.id === i)?.name || ""
+            ),
           })
       );
     }
@@ -77,6 +93,11 @@ export class RecommendationHandler {
           title: item.name,
           voteAverage: item.vote_average,
           voteCount: item.vote_count,
+          backdrop: item.backdrop_path,
+          releaseDate: new Date(item.first_air_date),
+          genres: item.genre_ids.map(
+            (i) => SerieGenres.find((g) => g.id === i)?.name || ""
+          ),
         })
     );
   }

@@ -1,4 +1,4 @@
-interface WatchableParams {
+export interface WatchableParams {
   id: number;
   title: string;
   overview: string;
@@ -6,6 +6,9 @@ interface WatchableParams {
   banner: string;
   voteAverage: number;
   voteCount: number;
+  backdrop: string;
+  releaseDate: Date;
+  genres: string[];
 }
 
 export class Watchable {
@@ -17,6 +20,9 @@ export class Watchable {
   banner: string;
   voteAverage: number;
   voteCount: number;
+  backdrop: string;
+  releaseDate: Date;
+  genres: string[];
 
   constructor(params: WatchableParams) {
     this.id = params.id;
@@ -26,8 +32,25 @@ export class Watchable {
     this.banner = params.banner;
     this.voteAverage = params.voteAverage;
     this.voteCount = params.voteCount;
+    this.backdrop = params.backdrop;
+    this.releaseDate = params.releaseDate;
+    this.genres = params.genres;
     this.sortCoefficient = this.calculateSortCoefficient();
+  }
 
+  public toPlain(): WatchableParams {
+    return {
+      id: this.id,
+      title: this.title,
+      overview: this.overview,
+      popularity: this.popularity,
+      banner: this.banner,
+      voteAverage: this.voteAverage,
+      voteCount: this.voteCount,
+      backdrop: this.backdrop,
+      releaseDate: this.releaseDate,
+      genres: this.genres,
+    };
   }
 
   private calculateSortCoefficient(): number {

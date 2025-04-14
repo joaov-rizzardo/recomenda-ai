@@ -19,7 +19,7 @@ export function ScoreIndicator({
   };
   return (
     <span className={cn("leading-relaxed", className)} {...props}>
-      <span className={cn(getColor(), "font-semibold")}>{score}</span>
+      <span className={cn(getColor(), "font-semibold")}>{score.toFixed(2)}</span>
       <span className="text-neutral-400"> / 10</span>
     </span>
   );
