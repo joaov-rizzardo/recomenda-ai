@@ -22,6 +22,7 @@ type RecommendationStoreType = {
   addKeyword: (keyword: string) => void;
   removeKeyword: (keyword: string) => void;
   redirect: (router: ReturnType<typeof useRouter>) => void;
+  reset: () => void;
 };
 
 export const useRecommendationStore = create<RecommendationStoreType>(
@@ -76,5 +77,13 @@ export const useRecommendationStore = create<RecommendationStoreType>(
       });
       router.push("/resultados");
     },
+    reset: () =>
+      set({
+        categories: new Set(),
+        keywords: new Set(),
+        mediaType: "movie",
+        recommendationType: "custom",
+        step: 1,
+      }),
   })
 );

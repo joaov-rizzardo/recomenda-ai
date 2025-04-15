@@ -12,6 +12,7 @@ import { WatchableCard } from "./watchable-card";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useRecommendationStore } from "./recommendation-form/recommendation-store";
 
 interface ResultListProps {
   results: WatchableParams[];
@@ -19,12 +20,18 @@ interface ResultListProps {
 
 export function ResultList({ results }: ResultListProps) {
   const [startIndex, setStartIndex] = useState<number>(0);
+  const { reset } = useRecommendationStore();
   const router = useRouter();
 
   const chunkSize = 3;
 
   const newRecommendation = () => {
     setStartIndex((state) => (state += 3));
+  };
+
+  const restartRecommendation = () => {
+    reset();
+    router.push("/");
   };
 
   return (
@@ -47,7 +54,7 @@ export function ResultList({ results }: ResultListProps) {
       </Carousel>
 
       <div className="mt-6 flex justify-end items-center gap-3">
-        <Button variant={"outline"} onClick={() => router.push("/")}>
+        <Button variant={"outline"} onClick={restartRecommendation}>
           Recomeçar
         </Button>
         <Button
