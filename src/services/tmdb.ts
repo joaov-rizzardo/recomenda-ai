@@ -5,85 +5,115 @@ import { KeywordResponseType } from "@/types/keywords-response-type";
 import { TrendingMoviesResponse } from "@/types/trending-movie-types";
 import { TrendingSeriesResponse } from "@/types/trending-series-types";
 import { WatchProvidersResponse } from "@/types/watch-providers-types";
-import axios, { Axios } from "axios";
 
-export class TMDB {
-  private static api: Axios = axios.create({
-    baseURL: env.TMDB_URL,
+function buildURL(path: string, params?: Record<string, any>): string {
+  const url = new URL(`${env.TMDB_URL}${path}`);
+  if (params) {
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        url.searchParams.set(key, value.toString());
+      }
+    });
+  }
+  return url.toString();
+}
+
+async function tmdbFetch<T>(
+  path: string,
+  options: RequestInit = {},
+  params?: Record<string, any>
+): Promise<T> {
+  const url = buildURL(path, params);
+
+  const defaultOptions: RequestInit = {
+    method: "GET",
     headers: {
       Authorization: `Bearer ${env.TMDB_TOKEN}`,
       "Content-Type": "application/json",
+      ...(options.headers || {}),
     },
-  });
+    next: { revalidate: 3600 },
+    ...options,
+  };
 
-  static async getTrendingMovies(timeWindow: "week" | "day") {
-    const { data } = await this.api.get<TrendingMoviesResponse>(
-      `/trending/movie/${timeWindow}?language=pt-BR`
-    );
-    return data;
+  const res = await fetch(url, defaultOptions);
+
+  if (!res.ok) {
+    throw new Error(`Error in TMDB request: ${res.statusText}`);
   }
 
-  static async getTrendingSeries(timeWindow: "week" | "day") {
-    const { data } = await this.api.get<TrendingSeriesResponse>(
-      `/trending/tv/${timeWindow}?language=pt-BR`
-    );
-    return data;
-  }
+  return res.json();
+}
 
-  static async getDiscoverMovies(categories: number[], keywords: number[]) {
-    const { data } = await this.api.get<DiscoverMovieResponse>(
-      `/discover/movie`,
+export class TMDB {
+  static getTrendingMovies(timeWindow: "week" | "day") {
+    return tmdbFetch<TrendingMoviesResponse>(
+      "/trending/movie/" + timeWindow,
+      {},
       {
-        params: {
-          language: "pt-BR",
-          region: "br",
-          with_genres: categories.join(";"),
-          with_keywords: keywords.join("|"),
-          sort_by: "popularity.desc",
-        },
+        language: "pt-BR",
       }
     );
-    return data;
   }
 
-  static async getDiscoverSeries(categories: number[], keywords: number[]) {
-    const { data } = await this.api.get<DiscoverSeriesResponse>(
-      `/discover/tv`,
+  static getTrendingSeries(timeWindow: "week" | "day") {
+    return tmdbFetch<TrendingSeriesResponse>(
+      "/trending/tv/" + timeWindow,
+      {},
       {
-        params: {
-          language: "pt-BR",
-          with_genres: categories.join(";"),
-          with_keywords: keywords.join("|"),
-          sort_by: "popularity.desc",
-        },
+        language: "pt-BR",
       }
     );
-    return data;
   }
 
-  static async getSerieWatchProviders(serieId: number) {
-    const { data } = await this.api.get<WatchProvidersResponse>(
-      `/tv/${serieId}/watch/providers`
+  static getDiscoverMovies(categories: number[], keywords: number[]) {
+    return tmdbFetch<DiscoverMovieResponse>(
+      "/discover/movie",
+      {},
+      {
+        language: "pt-BR",
+        region: "br",
+        with_genres: categories.join(";"),
+        with_keywords: keywords.join("|"),
+        sort_by: "popularity.desc",
+      }
     );
-    return data;
   }
 
-  static async getMovieWatchProviders(movieId: number) {
-    const { data } = await this.api.get<WatchProvidersResponse>(
-      `/movie/${movieId}/watch/providers`
+  static getDiscoverSeries(categories: number[], keywords: number[]) {
+    return tmdbFetch<DiscoverSeriesResponse>(
+      "/discover/tv",
+      {},
+      {
+        language: "pt-BR",
+        with_genres: categories.join(";"),
+        with_keywords: keywords.join("|"),
+        sort_by: "popularity.desc",
+      }
     );
-    return data;
   }
 
-  static async getKeyword(keyword: string) {
-    const { data } = await this.api.get<KeywordResponseType>(
+  static getSerieWatchProviders(serieId: number) {
+    return tmdbFetch<WatchProvidersResponse>(
+      "/tv/" + serieId + "/watch/providers",
+      {}
+    );
+  }
+
+  static getMovieWatchProviders(movieId: number) {
+    return tmdbFetch<WatchProvidersResponse>(
+      "/movie/" + movieId + "/watch/providers",
+      {}
+    );
+  }
+
+  static getKeyword(keyword: string) {
+    return tmdbFetch<KeywordResponseType>(
       "/search/keyword",
+      {},
       {
-        params: {
-          query: keyword,
-        },
+        query: keyword,
       }
     );
-    return data;
   }
 }
